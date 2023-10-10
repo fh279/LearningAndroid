@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Dice Roller</string>
     <string name="roll">Roll</string>
+    <string name="rollAction">Roll</string>
+    <string name="textNearButton">1</string>
+    <string name="Title">Калькулятор</string>
 </resources>
