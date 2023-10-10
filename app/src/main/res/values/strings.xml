@@ -4,4 +4,14 @@
     <string name="rollAction">Roll</string>
     <string name="textNearButton">1</string>
     <string name="Title">Калькулятор</string>
+    <string name="numOne">1</string>
+    <string name="numTwo">2</string>
+    <string name="numThree">3</string>
+    <string name="numFour">4</string>
+    <string name="numFive">5</string>
+    <string name="numSix">6</string>
+    <string name="numSeven">7</string>
+    <string name="numEight">8</string>
+    <string name="numNine">9</string>
+    <string name="Calculator">Calculator</string>
 </resources>
