@@ -15,4 +15,6 @@
     <string name="numNine">9</string>
     <string name="Calculator">Calculator</string>
     <string name="hint">Enter data here...</string>
+    <string name="enter_1st_num">Enter 1st num</string>
+    <string name="plus">plus</string>
 </resources>
