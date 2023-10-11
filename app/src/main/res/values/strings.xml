@@ -1,20 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dice Roller</string>
     <string name="roll">Roll</string>
     <string name="rollAction">Roll</string>
     <string name="textNearButton">1</string>
-    <string name="Title">Калькулятор</string>
-    <string name="numOne">1</string>
-    <string name="numTwo">2</string>
-    <string name="numThree">3</string>
-    <string name="numFour">4</string>
-    <string name="numFive">5</string>
-    <string name="numSix">6</string>
-    <string name="numSeven">7</string>
-    <string name="numEight">8</string>
-    <string name="numNine">9</string>
+    <string name="Title">Calculator</string>
+    <string name="num0">0</string>
+    <string name="num1">1</string>
+    <string name="num2">2</string>
+    <string name="num3">3</string>
+    <string name="num4">4</string>
+    <string name="num5">5</string>
+    <string name="num6">6</string>
+    <string name="num7">7</string>
+    <string name="num8">8</string>
+    <string name="num9">9</string>
     <string name="Calculator">Calculator</string>
-    <string name="hint">Enter data here…</string>
+    <string name="hint">Enter data here</string>
     <string name="firstHint">Enter data here…</string>
     <string name="enter_1st_number111">enter 1st number</string>
     <string name="divide">divide</string>
@@ -22,6 +24,8 @@
     <string name="minus">minus</string>
     <string name="plus">plus</string>
     <string name="textview">TextView</string>
-    <string name="enter_1st_num">Enter_1st_num</string>
+    <string name="enter_1st_num">Enter 1st num</string>
+    <string name="btnClear">Clear</string>
+    <string name="btnNum0">0</string>
 
 </resources>
