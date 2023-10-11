@@ -14,7 +14,14 @@
     <string name="numEight">8</string>
     <string name="numNine">9</string>
     <string name="Calculator">Calculator</string>
-    <string name="hint">Enter data here...</string>
-    <string name="enter_1st_num">Enter 1st num</string>
+    <string name="hint">Enter data here…</string>
+    <string name="firstHint">Enter data here…</string>
+    <string name="enter_1st_number111">enter 1st number</string>
+    <string name="divide">divide</string>
+    <string name="multiply">multiply</string>
+    <string name="minus">minus</string>
     <string name="plus">plus</string>
+    <string name="textview">TextView</string>
+    <string name="enter_1st_num">Enter_1st_num</string>
+
 </resources>
