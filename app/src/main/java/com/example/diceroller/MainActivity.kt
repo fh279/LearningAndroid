@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val textToAdd = getString(R.string.num1)
 
         val listOfNumButtons = listOf<Button>(
-            findViewById(R.id.btnNum0),
+            findViewById(R.id.btnNum0), // binding????
             findViewById(R.id.btnNum1),
             findViewById(R.id.btnNum2),
             findViewById(R.id.btnNum3),
@@ -32,12 +32,9 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btnNum8),
             findViewById(R.id.btnNum9),
         )
-        fun listenNums() {
-            for (numButton in listOfNumButtons) {
-                numButton.setOnClickListener { firstInputField.append(alreadyInField + listOfNumButtons.indexOf(numButton)) }
-            }
+        for (numButton in listOfNumButtons) {
+            numButton.setOnClickListener { firstInputField.append(alreadyInField + listOfNumButtons.indexOf(numButton)) }
         }
-        listenNums()
 
         fun clearTextFields() {
             firstInputField.text.clear()
@@ -45,5 +42,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnClear.setOnClickListener { clearTextFields() }
+    }
+}
+
+data class NumButton(
+    val value: Int, // что передает
+    val text: String = "$value", // что отображать на кнопке
+    val onClick: () -> Unit,
+)
+
+fun createButtons() =
+    List(10) { index ->
+        NumButton(value = index, text = "$index") {
+            print(index)
+        }
+    }
+
+fun clickOnEachButton() {
+    createButtons().forEach { numButton ->
+        numButton.onClick()
     }
 }
