@@ -13,10 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnNumOne = findViewById<Button>(R.id.btnNum1)
         val btnClear = findViewById<Button>(R.id.btnClear)
         val firstInputField = findViewById<EditText>(R.id.editTextNumber1)
         val secondInputField = findViewById<EditText>(R.id.editTextNumber2)
+        val inputFields = listOf<EditText>(firstInputField, secondInputField)
         val alreadyInField = firstInputField.text.toString()
         val textToAdd = getString(R.string.num1)
 
@@ -32,9 +32,25 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btnNum8),
             findViewById(R.id.btnNum9),
         )
-        for (numButton in listOfNumButtons) {
-            numButton.setOnClickListener { firstInputField.append(alreadyInField + listOfNumButtons.indexOf(numButton)) }
+
+        fun addNumToInputField(field: EditText) { // надо переделать так что бы ввод осуществлялся в активное поле
+            for (numButton in listOfNumButtons) {
+                numButton.setOnClickListener {
+                    field.append(
+                        alreadyInField +
+                            listOfNumButtons.indexOf(numButton),
+                    )
+                }
+            }
         }
+
+        fun inputTextToField(fields: List<EditText>) { // дай норм имя методу.
+            for (field in fields)
+                if (field.isFocused) {
+                    addNumToInputField(field)
+                }
+        }
+        inputTextToField(fields = inputFields)
 
         fun clearTextFields() {
             firstInputField.text.clear()
@@ -74,7 +90,6 @@ fun clickOnEachButton() { // што оно делает и что я тут за
  * активности или, как более модно, через 1 активность и фрагменты(кажется, так это называется).
  *
  *
- *
  * Что эта штука уже умеет?
  * - Клик на кнопку циферки производит ввод соответствующей цифры в поле ввода 1
  * - Кнопка clear стирает данные в обоих полях
@@ -87,7 +102,6 @@ fun clickOnEachButton() { // што оно делает и что я тут за
  * описано выше, это вычисление по клику на операцию и вычисление через парсинг введенного выражения.
  * -
  * -
- *
  *
  * Везде оставляй больше комментариев что хотел реализовать а то не помню...
  */
