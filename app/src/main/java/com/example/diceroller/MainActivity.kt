@@ -58,7 +58,7 @@ fun createButtons() =
         }
     }
 
-fun clickOnEachButton() {
+fun clickOnEachButton() { // што оно делает и что я тут задумывал?...
     createButtons().forEach { numButton ->
         numButton.onClick()
     }
@@ -87,4 +87,7 @@ fun clickOnEachButton() {
  * описано выше, это вычисление по клику на операцию и вычисление через парсинг введенного выражения.
  * -
  * -
+ *
+ *
+ * Везде оставляй больше комментариев что хотел реализовать а то не помню...
  */
