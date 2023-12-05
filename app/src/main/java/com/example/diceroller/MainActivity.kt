@@ -7,7 +7,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    // @SuppressLint("MissingInflatedId", "SetTextI18n")
     @SuppressLint("MissingInflatedId", "SetTextI18n", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         val secondInputField = findViewById<EditText>(R.id.editTextNumber2)
         val inputFields = listOf<EditText>(firstInputField, secondInputField)
         val alreadyInField = firstInputField.text.toString()
-        val textToAdd = getString(R.string.num1)
 
         val listOfNumButtons = listOf<Button>(
             findViewById(R.id.btnNum0), // binding????
@@ -45,10 +43,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun inputTextToField(fields: List<EditText>) { // дай норм имя методу.
-            for (field in fields)
-                if (field.isFocused) {
-                    addNumToInputField(field)
+            for (field in fields) {
+                field.setOnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        addNumToInputField(field)
+                    }
                 }
+            }
         }
         inputTextToField(fields = inputFields)
 
@@ -104,4 +105,8 @@ fun clickOnEachButton() { // што оно делает и что я тут за
  * -
  *
  * Везде оставляй больше комментариев что хотел реализовать а то не помню...
+ *
+ * понятие callback! разобрать. pattern obseverer!!!!!!!!
+ *
+ * это точно норм практика - объявить функцию и чуть наже сразу же ее вызывать?
  */
