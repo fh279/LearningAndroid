@@ -7,18 +7,16 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    // @SuppressLint("MissingInflatedId", "SetTextI18n")
     @SuppressLint("MissingInflatedId", "SetTextI18n", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnNumOne = findViewById<Button>(R.id.btnNum1)
         val btnClear = findViewById<Button>(R.id.btnClear)
         val firstInputField = findViewById<EditText>(R.id.editTextNumber1)
         val secondInputField = findViewById<EditText>(R.id.editTextNumber2)
+        val inputFields = listOf<EditText>(firstInputField, secondInputField)
         val alreadyInField = firstInputField.text.toString()
-        val textToAdd = getString(R.string.num1)
 
         val listOfNumButtons = listOf<Button>(
             findViewById(R.id.btnNum0), // binding????
@@ -32,9 +30,28 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btnNum8),
             findViewById(R.id.btnNum9),
         )
-        for (numButton in listOfNumButtons) {
-            numButton.setOnClickListener { firstInputField.append(alreadyInField + listOfNumButtons.indexOf(numButton)) }
+
+        fun addNumToInputField(field: EditText) { // надо переделать так что бы ввод осуществлялся в активное поле
+            for (numButton in listOfNumButtons) {
+                numButton.setOnClickListener {
+                    field.append(
+                        alreadyInField +
+                            listOfNumButtons.indexOf(numButton),
+                    )
+                }
+            }
         }
+
+        fun inputTextToField(fields: List<EditText>) { // дай норм имя методу.
+            for (field in fields) {
+                field.setOnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        addNumToInputField(field)
+                    }
+                }
+            }
+        }
+        inputTextToField(fields = inputFields)
 
         fun clearTextFields() {
             firstInputField.text.clear()
@@ -58,10 +75,40 @@ fun createButtons() =
         }
     }
 
-fun clickOnEachButton() {
+fun clickOnEachButton() { // што оно делает и что я тут задумывал?...
     createButtons().forEach { numButton ->
         numButton.onClick()
     }
     // some edit for Serge
 
 }
+
+/**
+ * Что я хочу сейчас и позже?
+ * Сначала - прога где я могу ввести числа в поля и по нажатию на кнопку символа операции произвести
+ * эту операцию с введенными числами.
+ * Потом хочется написать логику так что я ввожу выражение, а потом жму кнопку "вычислить" и
+ * выражение парсится, а в третье поле выводится результат вычисления или служеюное сообщение.
+ * Тут интересно как сделать переход из 1 в другое приложение. Из старого в новое. Возможно, через 2
+ * активности или, как более модно, через 1 активность и фрагменты(кажется, так это называется).
+ *
+ *
+ * Что эта штука уже умеет?
+ * - Клик на кнопку циферки производит ввод соответствующей цифры в поле ввода 1
+ * - Кнопка clear стирает данные в обоих полях
+ * -
+ *
+ * что еще не сделано и что надо вкорячить?
+ * - Второе поле не умеет принимать данные
+ * - Кнопки с Символами операции не работают
+ * -Запилить кнопочки перехода между старым и новым дизайном приложения (разные фрагменты, как
+ * описано выше, это вычисление по клику на операцию и вычисление через парсинг введенного выражения.
+ * -
+ * -
+ *
+ * Везде оставляй больше комментариев что хотел реализовать а то не помню...
+ *
+ * понятие callback! разобрать. pattern obseverer!!!!!!!!
+ *
+ * это точно норм практика - объявить функцию и чуть наже сразу же ее вызывать?
+ */
