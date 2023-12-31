@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 data class NumButton(
-    val value: Int, // что передает
+    val value: Int, // что передаетя
     val text: String = "$value", // что отображать на кнопке
     val onClick: () -> Unit,
 )
@@ -79,6 +79,9 @@ fun clickOnEachButton() { // што оно делает и что я тут за
     createButtons().forEach { numButton ->
         numButton.onClick()
     }
+    // some edit for Serge
+
+
 }
 
 /**
