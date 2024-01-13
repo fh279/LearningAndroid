@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val btnClear = findViewById<Button>(R.id.btnClear)
         val firstInputField = findViewById<EditText>(R.id.editTextNumber1)
         val secondInputField = findViewById<EditText>(R.id.editTextNumber2)
-        val inputFields = listOf<EditText>(firstInputField, secondInputField)
+        val inputFields = listOf<EditText>(firstInputField, secondInputField) //
         val alreadyInField = firstInputField.text.toString()
 
         val listOfNumButtons = listOf<Button>(
@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btnNum9),
         )
 
-        fun addNumToInputField(field: EditText) { // надо переделать так что бы ввод осуществлялся в активное поле
+
+        // надо переделать так что бы ввод осуществлялся в активное поле
+        fun addNumToInputField(field: EditText) {
             for (numButton in listOfNumButtons) {
                 numButton.setOnClickListener {
                     field.append(
@@ -42,15 +44,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun inputTextToField(fields: List<EditText>) { // дай норм имя методу.
+        // дай норм имя методу. И не понятно как это работает.
+        /**
+        ** Короче мы берем оба поля, перебираем. При переборе смотрим, что с фокусом.
+         * Один из параметров это лямбда
+         *
+         *
+         * */
+        fun inputTextToField(fields: List<EditText>) {
             for (field in fields) {
-                field.setOnFocusChangeListener { v, hasFocus ->
+                field.setOnFocusChangeListener ({ _, hasFocus -> // колбек это что?  в лямбдах нижнее подчеркивание обозначает неиспользуемые элементы.
                     if (hasFocus) {
                         addNumToInputField(field)
                     }
-                }
+                })
             }
         }
+
         inputTextToField(fields = inputFields)
 
         fun clearTextFields() {
@@ -79,7 +89,6 @@ fun clickOnEachButton() { // што оно делает и что я тут за
     createButtons().forEach { numButton ->
         numButton.onClick()
     }
-    // some edit for Serge
 
 
 }
@@ -112,4 +121,9 @@ fun clickOnEachButton() { // што оно делает и что я тут за
  * понятие callback! разобрать. pattern obseverer!!!!!!!!
  *
  * это точно норм практика - объявить функцию и чуть наже сразу же ее вызывать?
+ *
+ * Сделай так что бы кнопка Clear работала только на то поле на котором сейчас стоит фокус.
+ * А то сейчас она стирает оба поля. Не очень хорошо учитывая что ты мог безошибочно ввести данные
+ * в одно поле, начать вводить во второе, там ошибиться и стирая значение второго поля ты вынужден
+ * затирать в том числе и безошибочно введенное значение. Возможно длинное. Обида.
  */
