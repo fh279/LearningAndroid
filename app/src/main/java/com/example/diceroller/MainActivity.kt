@@ -31,7 +31,15 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btnNum9),
         )
 
-        fun addNumToInputField(field: EditText) { // надо переделать так что бы ввод осуществлялся в активное поле
+        /**
+         * addNumToInputField - это метод, который добавляет число в то поле, в которое указали.
+         * То есть это как бы приложение к какому-то методу, который будет указывать на конкретное поле.
+         * В данном случае в роли такого метода выступает inputTextToActiveTextField(это его старое название,
+         * он будет в дальнейшем переименован. Он определяет какое поле активно и в него сует число
+         * используя метод addNumToInputField.
+         */
+
+        fun addNumToInputField(field: EditText) {
             for (numButton in listOfNumButtons) {
                 numButton.setOnClickListener {
                     field.append(
@@ -42,16 +50,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun inputTextToField(fields: List<EditText>) { // дай норм имя методу.
+        // // я таки снова не понимаю как работает эта шляпа
+        fun inputTextToActiveTextField(fields: List<EditText>) {
             for (field in fields) {
-                field.setOnFocusChangeListener { v, hasFocus ->
+                field.setOnFocusChangeListener { _, hasFocus ->
                     if (hasFocus) {
                         addNumToInputField(field)
                     }
                 }
             }
         }
-        inputTextToField(fields = inputFields)
+        inputTextToActiveTextField(fields = inputFields)
 
         fun clearTextFields() {
             firstInputField.text.clear()
@@ -80,8 +89,6 @@ fun clickOnEachButton() { // што оно делает и что я тут за
         numButton.onClick()
     }
     // some edit for Serge
-
-
 }
 
 /**
