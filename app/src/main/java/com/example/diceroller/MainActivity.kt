@@ -52,18 +52,19 @@ class MainActivity : AppCompatActivity() {
 
         // дай норм имя методу. И не понятно как это работает.
         /**
-        ** Короче мы берем оба поля, перебираем. При переборе смотрим, что с фокусом.
+         * Короче мы берем оба поля, перебираем. При переборе смотрим, что с фокусом.
          * Один из параметров это лямбда
          * ААА! Все равно не понимаю как это работает. Долбай Вову.
-         *
+         * Еще. Перед и после лямбды можно поставить скобки. Значит это аргумент. Как мы описали
+         * выше. Вот в эту сторону смотри.
          * */
         fun inputTextToActiveTextField(fields: List<EditText>) {
             for (field in fields) {
-                field.setOnFocusChangeListener ({ _, hasFocus -> // колбек это что?  в лямбдах нижнее подчеркивание обозначает неиспользуемые элементы.
+                field.setOnFocusChangeListener { _, hasFocus -> // колбек это что?  в лямбдах нижнее подчеркивание обозначает неиспользуемые элементы.
                     if (hasFocus) {
                         addNumToInputField(field)
                     }
-                })
+                }
             }
         }
         inputTextToActiveTextField(fields = inputFields)
