@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val btnClear = findViewById<Button>(R.id.btnClear)
         val firstInputField = findViewById<EditText>(R.id.editTextNumber1)
         val secondInputField = findViewById<EditText>(R.id.editTextNumber2)
-        val inputFields = listOf<EditText>(firstInputField, secondInputField)
+        val inputFields = listOf<EditText>(firstInputField, secondInputField) //
         val alreadyInField = firstInputField.text.toString()
 
         val listOfNumButtons = listOf<Button>(
@@ -50,14 +50,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // // я таки снова не понимаю как работает эта шляпа
+        // дай норм имя методу. И не понятно как это работает.
+        /**
+        ** Короче мы берем оба поля, перебираем. При переборе смотрим, что с фокусом.
+         * Один из параметров это лямбда
+         * ААА! Все равно не понимаю как это работает. Долбай Вову.
+         *
+         * */
         fun inputTextToActiveTextField(fields: List<EditText>) {
             for (field in fields) {
-                field.setOnFocusChangeListener { _, hasFocus ->
+                field.setOnFocusChangeListener ({ _, hasFocus -> // колбек это что?  в лямбдах нижнее подчеркивание обозначает неиспользуемые элементы.
                     if (hasFocus) {
                         addNumToInputField(field)
                     }
-                }
+                })
             }
         }
         inputTextToActiveTextField(fields = inputFields)
@@ -119,4 +125,9 @@ fun clickOnEachButton() { // што оно делает и что я тут за
  * понятие callback! разобрать. pattern obseverer!!!!!!!!
  *
  * это точно норм практика - объявить функцию и чуть наже сразу же ее вызывать?
+ *
+ * Сделай так что бы кнопка Clear работала только на то поле на котором сейчас стоит фокус.
+ * А то сейчас она стирает оба поля. Не очень хорошо учитывая что ты мог безошибочно ввести данные
+ * в одно поле, начать вводить во второе, там ошибиться и стирая значение второго поля ты вынужден
+ * затирать в том числе и безошибочно введенное значение. Возможно длинное. Обида.
  */
