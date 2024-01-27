@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId", "SetTextI18n", "CutPasteId")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun onCreate(savedInstanceState: Bundle?) { // повтори цикл жизни приложения
+        super.onCreate(savedInstanceState) // это что такое?
+        setContentView(R.layout.activity_main) // а это что такое?
 
-        val btnClear = findViewById<Button>(R.id.btnClear)
+        val btnClear = findViewById<Button>(R.id.btnClear) // очищаем оба поля ввода чисел
         val firstInputField = findViewById<EditText>(R.id.editTextNumber1)
         val secondInputField = findViewById<EditText>(R.id.editTextNumber2)
         val inputFields = listOf<EditText>(firstInputField, secondInputField) //
@@ -95,7 +95,6 @@ fun clickOnEachButton() { // што оно делает и что я тут за
     createButtons().forEach { numButton ->
         numButton.onClick()
     }
-    // some edit for Serge
 }
 
 /**
@@ -131,4 +130,15 @@ fun clickOnEachButton() { // што оно делает и что я тут за
  * А то сейчас она стирает оба поля. Не очень хорошо учитывая что ты мог безошибочно ввести данные
  * в одно поле, начать вводить во второе, там ошибиться и стирая значение второго поля ты вынужден
  * затирать в том числе и безошибочно введенное значение. Возможно длинное. Обида.
+ */
+
+/**
+ * что надо уточнить.
+ * под каждой работающий фичей подпиши что она делает.
+ * выдели список всех рабочих методов, чтоб были списком чтоб было как то видно.
+ * Еще одним списком, рядом лежащим, опиши что еще надо сделать. Хотя бы в виде списка хотело.
+ *      Ну и проанализируй уже имеющиеся хотелки. Выше описаны.
+ *
+ * В XML'ках поправь чтоб кнопки цифер были расположены так как надо.
+ *
  */
