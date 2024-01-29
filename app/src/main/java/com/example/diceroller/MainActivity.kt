@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main) // а это что такое?
 
         val btnClear = findViewById<Button>(R.id.btnClear) // очищаем оба поля ввода чисел
-        val firstInputField = findViewById<EditText>(R.id.editTextNumber1)
-        val secondInputField = findViewById<EditText>(R.id.editTextNumber2)
+        val firstInputField = findViewById<EditText>(R.id.editTextField1)
+        val secondInputField = findViewById<EditText>(R.id.editTextField2)
         val inputFields = listOf<EditText>(firstInputField, secondInputField) //
         val alreadyInField = firstInputField.text.toString()
 
