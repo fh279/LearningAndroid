@@ -334,3 +334,5 @@ https://developer.android.com/guide/components/activities/activity-lifecycle#onc
 
 https://stackru.com/images/ac4ebc00019f0d31d61bfc2b6c00804433a6e1a4.png
 вот тут еще очень интересная пикча. ЗАДАЙ ВОПРОС РАЗРАБАМ НАДО ЛИ ЭТО УЧИТЬ!
+
+[QUESTION]: А еще вроде есть какой то метод onRestart(). Или нет? Увидел на картинке, посмотреть пока что поленился.

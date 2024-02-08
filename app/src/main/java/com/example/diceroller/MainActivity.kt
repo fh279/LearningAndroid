@@ -2,6 +2,8 @@ package com.example.diceroller
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.BaseInputConnection
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState) // это что такое?
         setContentView(R.layout.activity_main) // а это что такое?
 
-        val btnClear = findViewById<Button>(R.id.btnClear) // очищаем оба поля ввода чисел
         val firstInputField = findViewById<EditText>(R.id.editTextField1)
         val secondInputField = findViewById<EditText>(R.id.editTextField2)
         val inputFields = listOf<EditText>(firstInputField, secondInputField) //
         val alreadyInField = firstInputField.text.toString()
+        val btnClear = findViewById<Button>(R.id.btnClear) // очищаем оба поля ввода чисел
+        val btnBackSpace =
+            findViewById<Button>(R.id.btnBackSpace) // удаляем последнее имеещееся число в поле ввода
 
         val listOfNumButtons = listOf<Button>(
             findViewById(R.id.btnNum0), // binding????
@@ -43,11 +47,30 @@ class MainActivity : AppCompatActivity() {
             for (numButton in listOfNumButtons) {
                 numButton.setOnClickListener {
                     field.append(
-                        alreadyInField +
+                        alreadyInField + // тут почему то содержимое первого поля, но работает корректно для обоих..
                             listOfNumButtons.indexOf(numButton),
                     )
                 }
             }
+        }
+
+        fun deleteLastDigitInActiveField(fields: List<EditText>) {
+            /*for (field in fields) {
+                field.setOnFocusChangeListener { _, hasFocus -> // колбек это что?  в лямбдах нижнее подчеркивание обозначает неиспользуемые элементы.
+                    if (hasFocus) {*/
+
+            val textFieldInputConnection = BaseInputConnection(firstInputField, true)
+            textFieldInputConnection.sendKeyEvent(
+                KeyEvent(
+                    KeyEvent.ACTION_DOWN,
+                    KeyEvent.KEYCODE_DEL,
+                ),
+            )
+            /*val currentContentAsCharArray = field.text.toString().toCharArray()
+            *//*for (i in currentContentAsCharArray)*//*
+                        val currentContentMinus1Symbol = currentContentAsCharArray
+                            .slice(0 until currentContentAsCharArray.size-1) as CharSequence
+                        field.setText(currentContentMinus1Symbol)*/
         }
 
         // дай норм имя методу. И не понятно как это работает.
@@ -75,25 +98,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnClear.setOnClickListener { clearTextFields() }
+
+        btnBackSpace.setOnClickListener { deleteLastDigitInActiveField(inputFields) } // щас это рботает не совсем верно. Оно убирает последний символ у ВСЕХ ДВУХ полей. А надо чтоб убирало из активного и только.
     }
-}
 
-data class NumButton(
-    val value: Int, // что передаетя
-    val text: String = "$value", // что отображать на кнопке
-    val onClick: () -> Unit,
-)
+    data class NumButton(
+        val value: Int, // что передаетя
+        val text: String = "$value", // что отображать на кнопке
+        val onClick: () -> Unit,
+    )
 
-fun createButtons() =
-    List(10) { index ->
-        NumButton(value = index, text = "$index") {
-            print(index)
+    fun createButtons() =
+        List(10) { index ->
+            NumButton(value = index, text = "$index") {
+                print(index)
+            }
         }
-    }
 
-fun clickOnEachButton() { // што оно делает и что я тут задумывал?...
-    createButtons().forEach { numButton ->
-        numButton.onClick()
+    fun clickOnEachButton() { // што оно делает и что я тут задумывал?...
+        createButtons().forEach { numButton ->
+            numButton.onClick()
+        }
     }
 }
 

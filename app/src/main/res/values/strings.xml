@@ -26,6 +26,7 @@
     <string name="textview">TextView</string>
     <string name="enter_1st_num">Enter 1st num</string>
     <string name="btnClear">Clear</string>
+    <string name="btnBackSpace">BSpce</string>
     <string name="btnNum0">0</string>
 
 </resources>

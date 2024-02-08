@@ -105,8 +105,8 @@
         android:layout_height="wrap_content"
         android:text="@string/btnNum0"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/btnNum8"
-        app:layout_constraintTop_toBottomOf="@+id/btnNum8" />
+        app:layout_constraintStart_toStartOf="@+id/btnNum7"
+        app:layout_constraintTop_toBottomOf="@+id/btnNum7" />
 
     <Button
         android:id="@+id/btnClear"
@@ -116,6 +116,16 @@
         app:layout_constraintEnd_toEndOf="@+id/btnNum9"
         app:layout_constraintStart_toStartOf="@+id/btnNum9"
         app:layout_constraintTop_toBottomOf="@+id/btnNum8" />
+
+    <Button
+        android:id="@+id/btnBackSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnBackSpace"
+        app:layout_constraintEnd_toEndOf="@+id/btnNum8"
+        app:layout_constraintStart_toStartOf="@+id/btnNum8"
+        app:layout_constraintTop_toBottomOf="@+id/btnNum8" />
+
 
     <TextView
         android:id="@+id/textView2"
