@@ -2,8 +2,6 @@ package com.example.diceroller
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.inputmethod.BaseInputConnection
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btnNum9),
         )
 
+
         /**
          * addNumToInputField - это метод, который добавляет число в то поле, в которое указали.
          * То есть это как бы приложение к какому-то методу, который будет указывать на конкретное поле.
@@ -47,31 +46,44 @@ class MainActivity : AppCompatActivity() {
             for (numButton in listOfNumButtons) {
                 numButton.setOnClickListener {
                     field.append(
-                        alreadyInField + // тут почему то содержимое первого поля, но работает корректно для обоих..
-                            listOfNumButtons.indexOf(numButton),
+                        alreadyInField + listOfNumButtons.indexOf(numButton),
                     )
                 }
             }
         }
 
-        fun deleteLastDigitInActiveField(fields: List<EditText>) {
-            /*for (field in fields) {
-                field.setOnFocusChangeListener { _, hasFocus -> // колбек это что?  в лямбдах нижнее подчеркивание обозначает неиспользуемые элементы.
-                    if (hasFocus) {*/
+        // колбек это что? - колбэк это функция, которая будет вызвана когда определенный процесс
+        // завершит свою работу. Ничерта в этом пока что не понимаю.  в лямбдах нижнее подчеркивание обозначает неиспользуемые аргументы.
 
-            val textFieldInputConnection = BaseInputConnection(firstInputField, true)
-            textFieldInputConnection.sendKeyEvent(
-                KeyEvent(
-                    KeyEvent.ACTION_DOWN,
-                    KeyEvent.KEYCODE_DEL,
-                ),
-            )
-            /*val currentContentAsCharArray = field.text.toString().toCharArray()
-            *//*for (i in currentContentAsCharArray)*//*
-                        val currentContentMinus1Symbol = currentContentAsCharArray
-                            .slice(0 until currentContentAsCharArray.size-1) as CharSequence
-                        field.setText(currentContentMinus1Symbol)*/
+        fun deleteLastSymInActiveField() {
+            for (field in inputFields) {
+                if (field.hasFocus()) {
+                    if (field.toString().isNotEmpty()) {
+                        val fieldText = field.text
+                        val textWithoutLastSymblol =
+                            fieldText.substring(0, fieldText.length - 1)
+                        field.setText(textWithoutLastSymblol)
+                    }
+                    field.setSelection(field.text.length)
+                }
+            }
         }
+
+        btnBackSpace.setOnClickListener {
+            deleteLastSymInActiveField()
+        }
+
+        clickOnEachButton() // так что же оно все таки делает?...
+
+        fun clearTextInActiveField(fields: List<EditText>) {
+            for (field in fields) {
+                if (field.hasFocus()) {
+                    field.text.clear()
+                }
+            }
+        }
+
+        btnClear.setOnClickListener { clearTextInActiveField(inputFields) }
 
         // дай норм имя методу. И не понятно как это работает.
         /**
@@ -92,14 +104,8 @@ class MainActivity : AppCompatActivity() {
         }
         inputTextToActiveTextField(fields = inputFields)
 
-        fun clearTextFields() {
-            firstInputField.text.clear()
-            secondInputField.text.clear()
-        }
 
-        btnClear.setOnClickListener { clearTextFields() }
-
-        btnBackSpace.setOnClickListener { deleteLastDigitInActiveField(inputFields) } // щас это рботает не совсем верно. Оно убирает последний символ у ВСЕХ ДВУХ полей. А надо чтоб убирало из активного и только.
+        // btnBackSpace.setOnClickListener { deleteLastDigitInActiveField(inputFields) } // щас это рботает не совсем верно. Оно убирает последний символ у ВСЕХ ДВУХ полей. А надо чтоб убирало из активного и только.
     }
 
     data class NumButton(
@@ -108,14 +114,19 @@ class MainActivity : AppCompatActivity() {
         val onClick: () -> Unit,
     )
 
-    fun createButtons() =
+    fun createButtons() = // тут создаем кнопки, присваем из занчение и текст в них.
         List(10) { index ->
             NumButton(value = index, text = "$index") {
                 print(index)
             }
         }
 
-    fun clickOnEachButton() { // што оно делает и что я тут задумывал?...
+    // што оно делает и что я тут задумывал?...
+    // Кажется это проверятор на какую кнопку кликнуло.
+    // Типа эта штука постоянно вызывается и когда будет выполнено условие (onClick() ),
+    // то произойдет действие, запрограммированное на эту кнопку. Так ли это?
+    // А почему оно не вызывается?.....
+    fun clickOnEachButton() {
         createButtons().forEach { numButton ->
             numButton.onClick()
         }
