@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         val btnPlus = findViewById<Button>(R.id.btnPlus) // суммируем содержимое полей ввода
         val btnMinus = findViewById<Button>(R.id.btnMinus)
+        val btnMultiplications = findViewById<Button>(R.id.btnMultiply)
+        val btnDivision = findViewById<Button>(R.id.btnDivide)
         val listOfNumButtons = listOf<Button>(
             findViewById(R.id.btnNum0), // binding????
             findViewById(R.id.btnNum1),
@@ -120,6 +122,31 @@ class MainActivity : AppCompatActivity() {
         btnMinus.setOnClickListener {
             resultField.text = subtraction(firstInputField, secondInputField).toString()
         }
+
+        fun multiplicaton(firstField: EditText, secondField: EditText): Int {
+            val firstFieldValueAsInt = Integer.parseInt(firstField.text.toString())
+            val secondFieldValueAsInt = Integer.parseInt(secondField.text.toString())
+            if (firstField.text.isNotEmpty() && secondField.text.isNotEmpty()) {
+                return firstFieldValueAsInt * secondFieldValueAsInt
+            }
+            return 100700
+        }
+
+        btnMultiplications.setOnClickListener {
+            resultField.text = multiplicaton(firstInputField, secondInputField).toString()
+        }
+
+        fun division(firstField: EditText, secondField: EditText): Int {
+            val firstFieldValueAsInt = Integer.parseInt(firstField.text.toString())
+            val secondFieldValueAsInt = Integer.parseInt(secondField.text.toString())
+            if (firstField.text.isNotEmpty() && secondField.text.isNotEmpty()) {
+                return firstFieldValueAsInt / secondFieldValueAsInt
+            }
+            return 100700
+        }
+
+        btnDivision.setOnClickListener {
+            resultField.text = division(firstInputField, secondInputField).toString() }
 
         btnClear.setOnClickListener { clearTextInActiveField(inputFields) }
 
