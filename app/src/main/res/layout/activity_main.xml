@@ -168,8 +168,8 @@
         android:width="130dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/enter_1st_number111"
-        android:inputType="number|numberDecimal"
+        android:hint="@string/enter_2nd_number"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextField1"
@@ -190,7 +190,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -200,7 +200,8 @@
         android:defaultFocusHighlightEnabled="false"
         android:foregroundGravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:text="@string/textview"
+        android:hint="@string/result_hint"
+        android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -14,12 +15,15 @@ class MainActivity : AppCompatActivity() {
 
         val firstInputField = findViewById<EditText>(R.id.editTextField1)
         val secondInputField = findViewById<EditText>(R.id.editTextField2)
+        val resultField = findViewById<TextView>(R.id.textViewResults)
         val inputFields = listOf<EditText>(firstInputField, secondInputField) //
         val alreadyInField = firstInputField.text.toString()
         val btnClear = findViewById<Button>(R.id.btnClear) // очищаем оба поля ввода чисел
         val btnBackSpace =
             findViewById<Button>(R.id.btnBackSpace) // удаляем последнее имеещееся число в поле ввода
 
+        val btnPlus = findViewById<Button>(R.id.btnPlus) // суммируем содержимое полей ввода
+        val btnMinus = findViewById<Button>(R.id.btnMinus)
         val listOfNumButtons = listOf<Button>(
             findViewById(R.id.btnNum0), // binding????
             findViewById(R.id.btnNum1),
@@ -73,14 +77,48 @@ class MainActivity : AppCompatActivity() {
             deleteLastSymInActiveField()
         }
 
+
+
+
+
         clickOnEachButton() // так что же оно все таки делает?...
 
+        // Оно, конечно, неплохо, но может все таки чистить все поля?...
         fun clearTextInActiveField(fields: List<EditText>) {
             for (field in fields) {
                 if (field.hasFocus()) {
                     field.text.clear()
                 }
             }
+        }
+
+        // Оно работает, но чую написано невероятно коряво...
+        // Может тут надо параметры там и все такое...
+        // А то при вызове же не будет видно что куда кого...
+        fun summation(firstField: EditText, secondField: EditText): Int {
+            val firstFieldValueAsInt = Integer.parseInt(firstField.text.toString())
+            val secondFieldValueAsInt = Integer.parseInt(secondField.text.toString())
+            if (firstField.text.isNotEmpty() && secondField.text.isNotEmpty()) {
+                return firstFieldValueAsInt + secondFieldValueAsInt
+            }
+            return 100500
+        }
+
+        btnPlus.setOnClickListener {
+            resultField.text = summation(firstInputField, secondInputField).toString()
+        }
+
+        fun subtraction(firstField: EditText, secondField: EditText): Int {
+            val firstFieldValueAsInt = Integer.parseInt(firstField.text.toString())
+            val secondFieldValueAsInt = Integer.parseInt(secondField.text.toString())
+            if (firstField.text.isNotEmpty() && secondField.text.isNotEmpty()) {
+                return firstFieldValueAsInt - secondFieldValueAsInt
+            }
+            return 100600
+        }
+
+        btnMinus.setOnClickListener {
+            resultField.text = subtraction(firstInputField, secondInputField).toString()
         }
 
         btnClear.setOnClickListener { clearTextInActiveField(inputFields) }
@@ -134,6 +172,11 @@ class MainActivity : AppCompatActivity() {
 }
 
 /**
+ * Йоу. А мы не хотим параметризировать арифметические операции? А то в каждом методе у нас 2
+ * поля ввода и однотипное (достаточно) действие. И что? Просто копипаста кода...
+ *
+ *
+ *
  * Что я хочу сейчас и позже?
  * Сначала - прога где я могу ввести числа в поля и по нажатию на кнопку символа операции произвести
  * эту операцию с введенными числами.
@@ -145,11 +188,11 @@ class MainActivity : AppCompatActivity() {
  *
  * Что эта штука уже умеет?
  * - Клик на кнопку циферки производит ввод соответствующей цифры в поле ввода 1
- * - Кнопка clear стирает данные в обоих полях
+ * - Кнопка clear стирает данные в обоих полях - не, теперь стирает только в активном поле.
  * -
  *
  * что еще не сделано и что надо вкорячить?
- * - Второе поле не умеет принимать данные
+ * - Второе поле не умеет принимать данные - уже научилось.
  * - Кнопки с Символами операции не работают
  * -Запилить кнопочки перехода между старым и новым дизайном приложения (разные фрагменты, как
  * описано выше, это вычисление по клику на операцию и вычисление через парсинг введенного выражения.

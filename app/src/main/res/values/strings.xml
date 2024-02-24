@@ -28,5 +28,7 @@
     <string name="btnClear">Clear</string>
     <string name="btnBackSpace">BSpce</string>
     <string name="btnNum0">0</string>
+    <string name="enter_2nd_number">enter 2nd number</string>
+    <string name="result_hint">Здесь будет подсказка</string>
 
 </resources>
