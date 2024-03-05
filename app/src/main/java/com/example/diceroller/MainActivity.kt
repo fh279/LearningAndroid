@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -123,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             resultField.text = subtraction(firstInputField, secondInputField).toString()
         }
 
-        fun multiplicaton(firstField: EditText, secondField: EditText): Int {
+        fun multiplication(firstField: EditText, secondField: EditText): Int {
             val firstFieldValueAsInt = Integer.parseInt(firstField.text.toString())
             val secondFieldValueAsInt = Integer.parseInt(secondField.text.toString())
             if (firstField.text.isNotEmpty() && secondField.text.isNotEmpty()) {
@@ -133,12 +134,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnMultiplications.setOnClickListener {
-            resultField.text = multiplicaton(firstInputField, secondInputField).toString()
+            resultField.text = multiplication(firstInputField, secondInputField).toString()
         }
 
         fun division(firstField: EditText, secondField: EditText): Int {
             val firstFieldValueAsInt = Integer.parseInt(firstField.text.toString())
             val secondFieldValueAsInt = Integer.parseInt(secondField.text.toString())
+
             if (firstField.text.isNotEmpty() && secondField.text.isNotEmpty()) {
                 return firstFieldValueAsInt / secondFieldValueAsInt
             }
@@ -146,7 +148,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnDivision.setOnClickListener {
-            resultField.text = division(firstInputField, secondInputField).toString() }
+
+            if (secondInputField.text.toString().equals("0")) {
+                Toast.makeText(
+                    applicationContext,
+                    "Делить на ноль нельзя, дубина!",
+                    Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            resultField.text = division(firstInputField, secondInputField).toString()
+            /*try {
+                resultField.text = division(firstInputField, secondInputField).toString()
+            }
+            catch (arExc: ArithmeticException) {
+                Toast.makeText(
+                    applicationContext,
+                    "Делить на ноль нельзя, дубина!",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }*/
+        }
 
         btnClear.setOnClickListener { clearTextInActiveField(inputFields) }
 
@@ -176,7 +198,7 @@ class MainActivity : AppCompatActivity() {
     data class NumButton(
         val value: Int, // что передаетя
         val text: String = "$value", // что отображать на кнопке
-        val onClick: () -> Unit,
+        val onClick: () -> Unit, // Что тут происходит?..
     )
 
     fun createButtons() = // тут создаем кнопки, присваем из занчение и текст в них.
