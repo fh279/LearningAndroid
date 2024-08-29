@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Training_app</string>
+    <string name="training">Training</string>
+    <string name="dialog_title">Dialog Title</string>
+</resources>
