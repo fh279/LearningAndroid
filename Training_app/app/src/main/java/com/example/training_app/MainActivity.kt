@@ -1,5 +1,8 @@
 package com.example.training_app
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("Activity LifeCycle training", "Activity Created!")
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -22,11 +26,12 @@ class MainActivity : AppCompatActivity() {
         }
         val a: Button = findViewById(R.id.button)
         a.setOnClickListener {
-            with(DialogFragment()) {
-                dialog?.setTitle(R.string.dialog_title)
-                show(supportFragmentManager, "lalala")
-                // тут надо бы задать что должно появиться в диалоге, а то диалог есть, а содержимого ну вообще нет.
-            }
+            CustomNewDialogFragment().show(supportFragmentManager, "alala")
+            /*val builder = AlertDialog.Builder(this)
+            with(builder) {
+                setTitle("Title")
+                create()
+            }*/
 
             Log.i("Activity LifeCycle training", "Fragment showed")
         }
@@ -57,4 +62,18 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         Log.i("Activity LifeCycle training", "Activity is Stopped")
     }
+}
+
+class CustomNewDialogFragment(): DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val builder = AlertDialog.Builder(requireActivity())
+        with(builder) {
+            setTitle("Title")
+            setPositiveButton("Close", ) {dialog, id ->
+                dialog.dismiss()
+            }
+        }
+        return builder.create()
+    }
+
 }
