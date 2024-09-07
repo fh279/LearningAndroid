@@ -2,7 +2,7 @@ package com.example.training_app
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,13 +26,12 @@ class MainActivity : AppCompatActivity() {
         val a: Button = findViewById(R.id.button)
         a.setOnClickListener {
             CustomNewDialogFragment().show(supportFragmentManager, "alala")
-            /*val builder = AlertDialog.Builder(this)
-            with(builder) {
-                setTitle("Title")
-                create()
-            }*/
-
             Log.i("Activity LifeCycle training", "Fragment showed")
+        }
+
+        val btnGoToSecondScreen: Button = findViewById(R.id.button2)
+        btnGoToSecondScreen.setOnClickListener {
+            startActivity(Intent(baseContext, MainActivity2::class.java))
         }
 
     }
